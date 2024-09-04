@@ -1,0 +1,48 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Titulo</mat-label>
+        <input matInput placeholder="titulo" value="">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Bajada de titulo</mat-label>
+        <input matInput placeholder="bajada de titulo" value="">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Cuerpo</mat-label>
+        <textarea matInput placeholder="cuerpo"></textarea>
+    </mat-form-field>
+
+    <h4>tipo</h4>
+    <mat-form-field>
+        <mat-label>tipo</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="checked">noticia destacada</mat-checkbox>
+    </section>
+    <div class="nombrecargo">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre y apellido</mat-label>
+            <input matInput placeholder="Juanito" value="">
+        </mat-form-field>
+
+
+        <mat-form-field>
+            <mat-label>Cargo</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
+</form>
