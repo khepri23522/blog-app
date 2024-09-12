@@ -1,6 +1,6 @@
 .example-form {
     
-    width: 100%;
+    width: 95%;
     display:flex;
     justify-content: center;
     flex-direction: column;
@@ -8,20 +8,25 @@
   }
   
   .example-full-width {
-    width: 100%;
+    width: 95%;
   }
   
   td {
     padding-right: 8px;
   }
-  .card{
-    background: rgb(185, 191, 186);
-  }
+.h4 {
+  text-align: center;
+  width: 95%;
+  display: grid;
+
+}
+
+
   .nombrecargo{
     display: grid;
     grid-template-columns: auto auto;
     justify-content: center;
-    width: 100%;
+    width: 95%;
     gap: 20px;
   }
   
@@ -30,3 +35,21 @@
     font-size: 0.75em;
   }
   
+  .mat-checkbox {
+    background: linear-gradient(60deg, rgb(65, 192, 76) 0%, rgba(0,172,193,1) 100%);
+  }
+.mat-card {
+  background-color: aquamarine;
+}
+
+button {
+  background: linear-gradient(60deg, rgb(65, 192, 76) 0%, rgba(0,172,193,1) 100%);
+  color:rgb(255, 255, 255);
+  font-family: 'Lato', sans-serif;
+  font-weight:350;
+  letter-spacing: 2px;
+  font-size:12px;
+  text-align: center;
+  display: grid;
+  width: 100%;
+}
