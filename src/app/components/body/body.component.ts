@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
-interface Food {
+interface cargo {
   value: string;
   viewValue: string;
 }
@@ -8,15 +10,29 @@ interface Food {
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.scss']
+  styleUrls: ['./body.component.scss'],
+ 
+ 
+  
 })
 export class BodyComponent {
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
+  cargo: cargo[] = [
+    {value: '-0', viewValue: 'estudiante'},
+    {value: '-1', viewValue: 'profesores'},
+    {value: '-2', viewValue: 'externo'},
   ];
-
+ myform=new FormGroup({
+  title:new FormControl('',Validators.required,),
+  droptitle:new FormControl('',Validators.required),
+  body:new FormControl('',Validators.required),
+  type:new FormControl('',Validators.required),
+  name:new FormControl('',Validators.required),
+ });
+ 
+ 
+ submitted = true;
+ 
+//  cargo
   checked = false;
   indeterminate = false;
   labelPosition: 'before' | 'after' = 'after';

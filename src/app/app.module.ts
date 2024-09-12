@@ -11,6 +11,7 @@ import { BodyComponent } from './components/body/body.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
@@ -18,7 +19,6 @@ import {Component} from '@angular/core';
 
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     BrowserModule,
     AppRoutingModule,FormsModule, MatFormFieldModule, MatInputModule,MatCardModule,FormsModule,
      MatFormFieldModule, MatInputModule,MatFormFieldModule, MatSelectModule, NgFor, MatInputModule, FormsModule,
-     MatCardModule, MatCheckboxModule, FormsModule, MatRadioModule
+      MatCheckboxModule, FormsModule, MatRadioModule, ReactiveFormsModule,
     
 
   ],
