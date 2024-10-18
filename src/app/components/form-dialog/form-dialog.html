@@ -1,0 +1,70 @@
+<form class="example-form" [formGroup]="myform">
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>Crear noticia</mat-card-title>
+      <mat-form-field class="example-full-width">
+        <mat-label>Titulo</mat-label>
+        <input matInput placeholder="titulo" formControlName="title" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Bajada de titulo</mat-label>
+        <input
+          matInput
+          placeholder="bajada de titulo"
+          formControlName="droptitle"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Cuerpo</mat-label>
+        <textarea
+          matInput
+          placeholder="cuerpo"
+          formControlName="body"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>tipo</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let cargo of cargo" [value]="cargo.value">
+            {{cargo.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <section class="example-section">
+        <mat-checkbox class="example-margin" formControlName="checked"
+          >Noticia destacada
+        </mat-checkbox>
+      </section>
+      <div class="nombrecargo">
+        <h4>Informacion del publicador</h4>
+        <br />
+        <mat-form-field class="example-full-width">
+          <mat-label>Nombre y apellido</mat-label>
+          <input
+            matInput
+            placeholder="Nombre y apellido"
+            value="null"
+            formControlName="name"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Cargo</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let cargo of cargo" [value]="cargo.value">
+              {{cargo.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <br />
+      <button mat-raised-button (click)="saveForm()">Guardar</button>
+    </mat-card-content>
+  </mat-card>
+</form>
+
+<!-- {{ myform.value | json }} -->
