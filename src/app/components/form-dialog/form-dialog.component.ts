@@ -28,6 +28,7 @@ export class FormDialogComponent {
     type: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     checked: new FormControl(false, Validators.required),
+    publisher_job: new FormControl('', Validators.required),
   });
   submitted = true;
 

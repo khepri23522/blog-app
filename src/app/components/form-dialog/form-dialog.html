@@ -54,7 +54,7 @@
 
         <mat-form-field>
           <mat-label>Cargo</mat-label>
-          <mat-select formControlName="type">
+          <mat-select formControlName="publisher_job">
             <mat-option *ngFor="let cargo of cargo" [value]="cargo.value">
               {{cargo.viewValue}}
             </mat-option>

@@ -22,9 +22,10 @@ import { MainFeedComponent } from './components/main-feed/main-feed.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { HttpClientModule } from '@angular/common/http';
+import { BodyComponent } from './components/body/body.component';
 
 @NgModule({
-  declarations: [AppComponent, FormDialogComponent, MainFeedComponent],
+  declarations: [AppComponent, FormDialogComponent, MainFeedComponent, BodyComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
