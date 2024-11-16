@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormDialogComponent } from '../form-dialog/form-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MainService } from 'src/app/services/main.service';
+import { Route, Router } from '@angular/router';
+import { SingleViewComponent } from '../single-view/single-view.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-main-feed',
@@ -9,23 +16,39 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./main-feed.component.scss'],
 })
 export class MainFeedComponent implements OnInit {
-  savedData: any[] = []; // Para almacenar todos los datos guardados
+  savedData: any[] = [];
 
-  constructor(public dialog: MatDialog, public service: MainService) {}
+  isLoading = false;
+  isUserLogged = this.authService.isAuthenticated();
+
+  constructor(
+    public dialog: MatDialog,
+    public service: MainService,
+    private router: Router,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.loadSavedData(); // Cargar los datos guardados al iniciar el componente
+    this.loadSavedData();
   }
 
   loadSavedData(): void {
     this.service.getAll().subscribe({
       next: (data) => {
-        this.savedData = data; // Cargar los datos desde la base de datos
+        console.log(data);
+        this.savedData = data;
+        this.ShowMessage('noticias cargadas correctamente ✅');
       },
       error: (error) => {
         console.error('Error al cargar los datos:', error);
+        this.ShowMessage('Error al cargar las noticias ❌');
       },
     });
+  }
+
+  ShowMessage(message: string) {
+    this.snackBar.open(message)._dismissAfter(3000);
   }
 
   openForm() {
@@ -39,20 +62,66 @@ export class MainFeedComponent implements OnInit {
         title: data.title,
         subtitle: data.droptitle,
         body: data.body,
-        report_type: data.type,
-        is_primary: data.checked,
-        publisher_name: data.name,
-        publisher_job: data.publisher_job,
+        reportType: data.type,
+        isPrimary: data.checked,
+        publisherName: data.name,
+        publisherJob: data.publisher_job,
       };
 
       this.service.createBlog(formData).subscribe({
         next: () => {
-          this.loadSavedData(); // Recargar los datos después de guardar
+          this.loadSavedData();
         },
         error: (error) => {
           console.error('Error al crear el blog:', error);
         },
       });
+    });
+  }
+
+  goblog(id: number) {
+    console.log(id);
+    this.router.navigate(['/blog', id]);
+  }
+
+  logout() {
+    this.authService.deleteToken();
+    location.reload();
+  }
+
+  login() {
+    this.router.navigate(['/login']);
+  }
+
+  editBlog(blogId: number): void {
+    const selectedBlog = this.savedData.find((blog) => blog.id === blogId);
+
+    if (!selectedBlog) {
+      console.error(`Blog con ID ${blogId} no encontrado.`);
+      this.ShowMessage('No se pudo encontrar el blog seleccionado ❌');
+      return;
+    }
+
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      width: '800px',
+      disableClose: true,
+      data: selectedBlog,
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        const updatedBlog = { ...selectedBlog, ...data };
+        this.service.updateBlog(blogId, updatedBlog).subscribe({
+          next: () => {
+            this.loadSavedData();
+            this.ShowMessage('Blog actualizado correctamente ✅');
+          },
+          error: (error) => {
+            console.error('Error al actualizar el blog:', error);
+            this.ShowMessage('Error al actualizar el blog ❌');
+          },
+        });
+      }
     });
   }
 }

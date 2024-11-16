@@ -3,11 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainFeedComponent } from './components/main-feed/main-feed.component';
 import { FormDialogComponent } from './components/form-dialog/form-dialog.component';
 import { BodyComponent } from './components/body/body.component';
+import { SingleViewComponent } from './components/single-view/single-view.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', component: MainFeedComponent },
-  { path: '', component: FormDialogComponent },
-  { path: ' ', component: BodyComponent },
+  {
+    path: 'blog/:id',
+    component: SingleViewComponent,
+  },
+  { path: 'login', component: LoginComponent },
+
+  // { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

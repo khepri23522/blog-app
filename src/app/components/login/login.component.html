@@ -1,0 +1,21 @@
+<mat-card>
+  <form [formGroup]="loginForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>email</mat-label>
+      <input matInput placeholder="Nombre" formControlName="Nombre_log" />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>contraseña</mat-label>
+      <input
+        type="password"
+        autocomplete="on"
+        matInput
+        placeholder="contraseña"
+        formControlName="contr_usr"
+      />
+    </mat-form-field>
+
+    <button (click)="login()">Iniciar sesion</button>
+  </form>
+</mat-card>

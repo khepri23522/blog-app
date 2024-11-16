@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Title } from '@angular/platform-browser';
-
-interface cargo {
-  value: string;
-  viewValue: string;
-}
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-body',
@@ -14,13 +8,17 @@ interface cargo {
   styleUrls: ['./form-dialog.scss'],
 })
 export class FormDialogComponent {
-  constructor(private diallogRef: MatDialogRef<FormDialogComponent>) {}
-
-  cargo: cargo[] = [
-    { value: '0', viewValue: 'estudiante' },
-    { value: '1', viewValue: 'profesores' },
-    { value: '2', viewValue: 'externo' },
+  cargos: string[] = [
+    'estudiante',
+    'profesores',
+    'externo',
+    'admin',
+    'editor',
+    'redactor',
+    'moderador',
+    'visitante',
   ];
+
   myform = new FormGroup({
     title: new FormControl('', Validators.required),
     droptitle: new FormControl('', Validators.required),
@@ -30,11 +28,35 @@ export class FormDialogComponent {
     checked: new FormControl(false, Validators.required),
     publisher_job: new FormControl('', Validators.required),
   });
-  submitted = true;
+
+  constructor(
+    private dialogRef: MatDialogRef<FormDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  ngOnInit(): void {
+    if (this.data) {
+      this.myform.patchValue({
+        title: this.data.title,
+        droptitle: this.data.subtitle,
+        body: this.data.body,
+        type: this.data.reportType,
+        name: this.data.publisherName,
+        checked: this.data.isPrimary,
+        publisher_job: this.data.publisherJob,
+      });
+    }
+  }
 
   saveForm(): void {
     if (this.myform.valid) {
-      this.diallogRef.close(this.myform.value);
+      this.dialogRef.close(this.myform.value);
+    } else {
+      console.warn('Formulario inválido:', this.myform.errors);
     }
+  }
+
+  cancelForm(): void {
+    this.dialogRef.close();
   }
 }

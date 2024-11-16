@@ -23,9 +23,22 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { HttpClientModule } from '@angular/common/http';
 import { BodyComponent } from './components/body/body.component';
+import { SingleViewComponent } from './components/single-view/single-view.component';
+import { CookieService } from 'ngx-cookie-service';
+import { LoginComponent } from './components/login/login.component';
+
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [AppComponent, FormDialogComponent, MainFeedComponent, BodyComponent],
+  declarations: [
+    AppComponent,
+    FormDialogComponent,
+    MainFeedComponent,
+    BodyComponent,
+    SingleViewComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,6 +50,7 @@ import { BodyComponent } from './components/body/body.component';
     MatInputModule,
     MatSelectModule,
     MatInputModule,
+    MatSnackBarModule,
     FormsModule,
     MatCheckboxModule,
     FormsModule,
@@ -46,7 +60,7 @@ import { BodyComponent } from './components/body/body.component';
     MatDialogModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

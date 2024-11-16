@@ -1,7 +1,6 @@
 <div class="header">
   <h1>Noticiero UNACH</h1>
 
-  <!--Waves Container-->
   <div>
     <svg
       class="waves"
@@ -22,7 +21,7 @@
           xlink:href="#gentle-wave"
           x="48"
           y="0"
-          fill="rgba(255,255,255,0.7"
+          fill="rgba(255,255,255,0.7)"
         />
         <use
           xlink:href="#gentle-wave"
@@ -42,7 +41,19 @@
   </div>
 </div>
 
-<button mat-raised-button (click)="openForm()">nueva noticia</button>
+<div class="btn" *ngIf="isUserLogged; else userNotLogged">
+  <button mat-raised-button (click)="openForm()">nueva noticia</button>
+
+  <button mat-raised-button color="primary" (click)="logout()" class="mx-2">
+    cerrrar sesion
+  </button>
+</div>
+
+<ng-template #userNotLogged>
+  <button mat-raised-button color="primary" (click)="login()">
+    Iniciar Sesion
+  </button>
+</ng-template>
 
 <div *ngIf="savedData.length > 0">
   <div *ngFor="let blog of savedData">
@@ -57,6 +68,11 @@
         <p><strong>Es Primario:</strong> {{ blog.is_primary ? "Sí" : "No" }}</p>
         <p><strong>Nombre del Editor:</strong> {{ blog.publisher_name }}</p>
         <p><strong>Puesto del Editor:</strong> {{ blog.publisher_job }}</p>
+        <button mat-button (click)="goblog(blog.id)">abrir</button>
+
+        <button mat-button (click)="editBlog(blog.id)" *ngIf="isUserLogged">
+          editar noticia
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
