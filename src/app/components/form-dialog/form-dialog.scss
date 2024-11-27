@@ -112,3 +112,17 @@ body {
   margin: 10px 0;
   color: #444;
 }
+
+.text-editor {
+  margin: 5%;
+  padding: 5%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.editor {
+  margin-bottom: 20px;
+}

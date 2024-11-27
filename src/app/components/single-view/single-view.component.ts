@@ -18,18 +18,17 @@ export class SingleViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.blogId = Number(this.activatedRoute.snapshot.params['id']);
-    console.log(this.blogId);
-
-    this.service.getblogId(this.blogId).subscribe((blog) => {
-      console.log(blog);
-      this.blog = blog;
+    this.service.getblogId(this.blogId).subscribe({
+      next: (data) => {
+        if (data.data && data.data.length > 0) {
+          this.blog = data.data[0];
+        } else {
+          console.error('El blog no se encontró o está vacío.');
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener el blog:', error);
+      },
     });
   }
-  
-
-
-
-
-
-
 }

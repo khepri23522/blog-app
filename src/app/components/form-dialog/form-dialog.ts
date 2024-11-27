@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Editor } from 'ngx-editor';
 import { FormDialogComponent } from './form-dialog.component';
 
 describe('FormDialogComponent', () => {
@@ -19,4 +19,3 @@ describe('FormDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

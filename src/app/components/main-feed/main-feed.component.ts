@@ -37,7 +37,7 @@ export class MainFeedComponent implements OnInit {
     this.service.getAll().subscribe({
       next: (data) => {
         console.log(data);
-        this.savedData = data;
+        this.savedData = data.data;
         this.ShowMessage('noticias cargadas correctamente ✅');
       },
       error: (error) => {
@@ -67,6 +67,7 @@ export class MainFeedComponent implements OnInit {
         publisherName: data.name,
         publisherJob: data.publisher_job,
       };
+      console.log(formData);
 
       this.service.createBlog(formData).subscribe({
         next: () => {
@@ -104,13 +105,24 @@ export class MainFeedComponent implements OnInit {
 
     const dialogRef = this.dialog.open(FormDialogComponent, {
       width: '800px',
+      maxHeight: '8000px',
       disableClose: true,
-      data: selectedBlog,
+      data: { ...selectedBlog },
     });
 
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        const updatedBlog = { ...selectedBlog, ...data };
+        const updatedBlog = {
+          id: selectedBlog.id,
+          title: data.title ?? selectedBlog.title,
+          subtitle: data.subtitle ?? selectedBlog.subtitle,
+          body: data.body ?? selectedBlog.body,
+          reportType: data.type ?? selectedBlog.reportType,
+          isPrimary: data.checked ?? selectedBlog.isPrimary,
+          publisherName: data.name ?? selectedBlog.publisherName,
+          publisherJob: data.publisher_job ?? selectedBlog.publisherJob,
+        };
+
         this.service.updateBlog(blogId, updatedBlog).subscribe({
           next: () => {
             this.loadSavedData();

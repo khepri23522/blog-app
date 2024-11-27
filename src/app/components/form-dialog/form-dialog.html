@@ -2,7 +2,7 @@
   <div class="modal-content">
     <form class="example-form" [formGroup]="myform">
       <mat-card>
-        <mat-card-content>
+        <mat-card-content class="form">
           <mat-card-title>Crear noticia</mat-card-title>
 
           <mat-form-field class="example-full-width">
@@ -15,18 +15,28 @@
             <input
               matInput
               placeholder="bajada de titulo"
-              formControlName="droptitle"
+              formControlName="subtitle"
             />
           </mat-form-field>
 
-          <mat-form-field class="example-full-width">
+          <!-- <mat-form-field class="example-full-width">
             <mat-label>Cuerpo</mat-label>
             <textarea
               matInput
               placeholder="cuerpo"
               formControlName="body"
             ></textarea>
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <div class="NgxEditor__Wrapper editor">
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+            </ngx-editor-menu>
+            <ngx-editor
+              [editor]="editor"
+              formControlName="body"
+              [placeholder]="'Type here...'"
+            ></ngx-editor>
+          </div>
 
           <mat-form-field>
             <mat-label>Tipo</mat-label>

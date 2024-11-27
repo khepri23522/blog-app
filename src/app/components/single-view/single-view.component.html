@@ -1,8 +1,10 @@
 <mat-card class="card">
   <div *ngIf="blog">
-    <h1>{{ blog.title }}</h1>
+    <mat-card-title>{{ blog.title }}</mat-card-title>
     <h2>{{ blog.subtitle }}</h2>
-    <p><strong>Cuerpo:</strong> {{ blog.body }}</p>
+    <p><strong>Cuerpo:</strong></p>
+    <div [innerHTML]="blog.body"></div>
+
     <p><strong>Tipo de Reporte:</strong> {{ blog.report_type }}</p>
     <p>
       <strong>Noticia destacada:</strong> {{ blog.is_primary ? "Sí" : "No" }}

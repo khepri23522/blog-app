@@ -63,9 +63,13 @@
         <mat-card-subtitle>{{ blog.subtitle }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p><strong>Cuerpo:</strong> {{ blog.body }}</p>
+        <!-- <p><strong>Cuerpo:</strong></p> -->
+        <!-- <div [innerHTML]="blog.body"></div> -->
+
         <p><strong>Tipo de Reporte:</strong> {{ blog.report_type }}</p>
-        <p><strong>Es Primario:</strong> {{ blog.is_primary ? "Sí" : "No" }}</p>
+        <p>
+          <strong>Es destacada:</strong> {{ blog.is_primary ? "Sí" : "No" }}
+        </p>
         <p><strong>Nombre del Editor:</strong> {{ blog.publisher_name }}</p>
         <p><strong>Puesto del Editor:</strong> {{ blog.publisher_job }}</p>
         <button mat-button (click)="goblog(blog.id)">abrir</button>
